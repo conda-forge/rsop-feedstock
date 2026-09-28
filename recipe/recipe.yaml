@@ -1,5 +1,5 @@
 context:
-  version: "0.11.4"
+  version: "0.11.5"
 
 package:
   name: rsop
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://codeberg.org/heiko/rsop/archive/rsop/v${{ version }}.tar.gz
-  sha256: a302200785ed4dbc07c1883d91d58ffd26c8f3fb8c167f5009e1a40887b1298d
+  sha256: ec746a90f8db82c893bf75d80c92479363812c82509e3cb9171397d625cbae47
 
 build:
   number: 0
@@ -22,7 +22,7 @@ build:
       - if: target_platform == "osx-arm64"
         then: |
           ^cargo fetch --locked
-          
+
           $env.CARGO_HOME? | default ($env.HOME | path join .cargo) | path join '**/aarch64_apple.S' | glob $in | each {|file|
             cp $file $'($file).bak'
             open $file | str replace --all '#:lo12:' '' | save --force $file
